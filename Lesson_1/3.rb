@@ -21,17 +21,21 @@ if c > gipotenuza
   storona2=b
 end
 
-ravnobed = 'a==b || b==c || a==c'
+if a==b || b==c || a==c
+  ravnobed = true
+end
 
-pifagor = storona1**2+storona2**2-gipotenuza**2
+if storona1**2+storona2**2 == gipotenuza**2
+  pifagor = true
+end
 
 
-if (pifagor == 0) && (a==b || b==c || a==c)
+if pifagor && ravnobed
   puts "Treugolnik yavlyaetsa pryamopugolnim i ravnobedrennim"
-elsif pifagor == 0
+elsif pifagor
   puts "Treugolnik yavlyaetsa pryamopugolnim"
 end
 
-if a==b || b==c || a==c
+if ravnobed
   puts "Treugilnik yavlyaetsa ravnobedrennim i ravnostoronnim"
 end
