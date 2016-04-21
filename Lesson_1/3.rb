@@ -21,13 +21,17 @@ if c > gipotenuza
   storona2=b
 end
 
-ravnobed = '#{a}==#{b} || #{b}==#{c} || #{a}==#{c}'
+ravnobed = 'a==b || b==c || a==c'
 
-formula = '#{storona1}**2+#{storona2}**2 == #{gipotenuza}**2'
+pifagor = storona1**2+storona2**2-gipotenuza**2
 
 
-if formula && ravnobed
-  puts "Treugolnik yavlyaetsa pryamopugolnim i ravnibedrennim"
-elsif formula
+if (pifagor == 0) && (a==b || b==c || a==c)
+  puts "Treugolnik yavlyaetsa pryamopugolnim i ravnobedrennim"
+elsif pifagor == 0
   puts "Treugolnik yavlyaetsa pryamopugolnim"
+end
+
+if a==b || b==c || a==c
+  puts "Treugilnik yavlyaetsa ravnobedrennim i ravnostoronnim"
 end
