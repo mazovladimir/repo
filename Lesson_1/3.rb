@@ -1,27 +1,33 @@
 print "Vvedite pervuyu storonu: "
-a = gets.to_i
+a = gets.to_f
 print "Vvedite vtoruyu storonu: "
-b = gets.to_i
+b = gets.to_f
 print "Vvedite tretyu storonu: "
-c = gets.to_i
+c = gets.to_f
 
 if a > b
-    max = a
+  gipotenuza = a
+  storona1=b
+  storona2=c
 else
-    max = b
+  gipotenuza = b
+  storona1=a
+  storona2=c
 end
 
-if c > max then
-    max = c
+if c > gipotenuza
+  gipotenuza=c
+  storona1=a
+  storona2=b
 end
 
+ravnobed = '#{a}==#{b} || #{b}==#{c} || #{a}==#{c}'
 
-if (a**2+b**2) == (max**2) && ((a==b) || (b==c) || (a==c))
-    puts "Treugolnik yavlyaetsa pryamopugolnim i ravnibedrennim"
-elsif (a**2+b**2) == (max**2)
-    puts "Treugolnik yavlyaetsa pryamopugolnim"
-end
+formula = '#{storona1}**2+#{storona2}**2 == #{gipotenuza}**2'
 
-if (a==b) && (b==c) && (a==c)
-    puts "Treugolnik ravnobedrenniy i ravnostoronnii"
+
+if formula && ravnobed
+  puts "Treugolnik yavlyaetsa pryamopugolnim i ravnibedrennim"
+elsif formula
+  puts "Treugolnik yavlyaetsa pryamopugolnim"
 end

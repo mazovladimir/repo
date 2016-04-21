@@ -6,7 +6,7 @@ height = gets.chomp.to_i
 ideal = height-110
 
 if ideal < 0
-puts "Hello #{name}, your weight is ideal"
+  puts "Hello #{name}, your weight is ideal"
 else
-puts "Hello #{name}, you ideal weight is #{ideal}"
+  puts "Hello #{name}, you ideal weight is #{ideal}"
 end

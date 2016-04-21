@@ -1,7 +1,7 @@
 print "Vvedite osnovanie treugolnika: "
-a = gets.to_i
+a = gets.to_f
 print "Vvedite visotu treugolnika: "
-h = gets.to_i
+h = gets.to_f
 
 s = a * h / 2
 
