@@ -1,11 +1,13 @@
-all = ("A".."Z").to_a
-count=1
+all = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+glasnie = ['A', 'E', 'I', 'O', 'U', 'Y']
 hash = {}
-all.each do |a|
-  if a == 'A' || a == 'E' || a == 'I' || a == 'O' || a == 'U' || a == 'Y'
-    hash[a] = count
+all.each_index do |a|
+  glasnie.each do |b|
+    if all[a] == b
+      hash[a+1] = all[a]
+    end
   end
-    count+=1
 end
 
 puts hash
+

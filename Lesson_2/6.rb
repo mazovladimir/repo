@@ -6,9 +6,7 @@ loop do
 print "Vvedite nazvanie tovara: "
 name = gets.chomp
 
-if name == "stop"
-  break
-end
+break if name == "stop"
   
 print "Vvedite cenu za tovar: "
 price = gets.to_i

@@ -11,7 +11,7 @@ all_day = 0
 
 months = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
 
-if (year==2000) || ((year%4==0 || year%400==0) && (year%100!=0))
+if ((year%4==0 || year%400==0) && (year%100!=0))
   months[1] = 29
   puts "God visokosniy"
 end
