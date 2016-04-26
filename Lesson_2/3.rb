@@ -1,4 +1,3 @@
-limit = 100
 fib_sum = 0
 a = [ 1, 1 ]
 
