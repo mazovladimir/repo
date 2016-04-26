@@ -1,5 +1,4 @@
 a = {}
-obshee = 0
 
 loop do
 
@@ -18,12 +17,13 @@ a[name] = {price => count}
 end
 
 puts a
+all = 0
 a.each do |key1,value1| 
   value1.each do |key2,value2|
     total = key2 * value2    
-    obshee += total
+    all += total
     puts "#{key1} - stoit #{total}"
   end
 end
 
-puts "Polnaya Stoimost v korzine - #{obshee}"
+puts "Polnaya Stoimost v korzine - #{all}"
