@@ -2,18 +2,18 @@ a = {}
 
 loop do
 
-print "Vvedite nazvanie tovara: "
-name = gets.chomp
+  print "Vvedite nazvanie tovara: "
+  name = gets.chomp
 
-break if name == "stop"
+  break if name == "stop"
   
-print "Vvedite cenu za tovar: "
-price = gets.to_i
+  print "Vvedite cenu za tovar: "
+  price = gets.to_i
 
-print "Vvedite kolichestvo tovara: "
-count = gets.to_f
+  print "Vvedite kolichestvo tovara: "
+  count = gets.to_f
 
-a[name] = {price => count}
+  a[name] = {price => count}
 end
 
 puts a
