@@ -2,9 +2,7 @@ all = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"
 glasnie = ['A', 'E', 'I', 'O', 'U', 'Y']
 hash = {}
 all.each_with_index do |item, index|
-  if glasnie.include?(item)
-      hash[item] = index+1 
-  end
+      hash[item] = index+1 if glasnie.include?(item)
 end
 
 puts hash
