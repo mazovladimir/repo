@@ -38,7 +38,6 @@ end
 class Train < Route
   attr_reader :speed, :vagon
   def initialize(number,type,vagon)
-    super
     @number = number
     @type = type
     @vagon = vagon
