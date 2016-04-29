@@ -6,12 +6,12 @@ class Station
   end
 
   def in_train
-    @count += 1     
+    count += 1     
   end
 
   def out_train
-    if @count > 0
-      @count -= 1 
+    if count > 0
+      count -= 1 
     else
       puts "Vagonov net"
     end
@@ -19,27 +19,21 @@ class Station
 end
 
 class Route
-  attr_reader :station
+  attr_reader :stationS
   def initialize(first,last)
-    @first = first
-    @last = last
-    @station = [first, last]
+    @stationS = [first, last]
   end
 
   def add_station(add_st)
-    @station.insert(-2,add_st)
+    @stationS.insert(-2,add_st)
   end
 
   def delete_station(del_st)
-    @station.delete(del_st)
-  end
-
-  def show_station
-    @station
+    @stationS.delete(del_st)
   end
 end
 
-class Train < Route
+class Train
   attr_reader :speed, :vagon, :route
   def initialize(number,type,vagon)
     @number = number
@@ -70,7 +64,7 @@ class Train < Route
   end
 
   def route_inherit(path)
-    @route = path.station
+    @route = path.stationS
   end
 
   def whatis_my_station
