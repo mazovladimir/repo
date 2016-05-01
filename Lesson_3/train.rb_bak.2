@@ -6,12 +6,12 @@ class Station
   end
 
   def in_train
-    @count += 1     
+    count += 1     
   end
 
   def out_train
-    if @count > 0
-      @count -= 1 
+    if count > 0
+      count -= 1 
     else
       puts "Vagonov net"
     end
@@ -41,8 +41,6 @@ class Train
     @vagon = vagon
     @speed = 0
     @index_station = 0
-    @count_passanger = 0
-    @count_cargo = 0
   end
 
   def increase_speed
@@ -54,13 +52,7 @@ class Train
   end
 
   def vagon_attach
-    if @speed == 0 && @type == "passanger"
-      @vagon+=1
-      @count_passanger = @vagon
-    elsif @speed == 0 && @type == "cargo"
-      @vagon += 1
-      @count_cargo = @vagon
-    end
+    @vagon+=1 if @speed == 0
   end
 
   def vagon_detach
@@ -86,38 +78,6 @@ class Train
   end
 
   def before_station
-    @index_station -=1 if @index_station > 0
-  end
-end
-
-class PassangerTrain < Train
-  def self.count_p
-    if @speed == 0 && @type == "passanger"
-      @count_passanger = @vagon
-      @count_passanger += 1
-    end
-  end
-end
-
-class CargoTrain < Train
-  def count_c
-  end  
-end
-
-class PassangerVagon < Train
-  def initialize
-  end
-
-  def vagon_passanger
-    @count_passanger
-  end
-end
-
-class CargoVagon < Train
-  def initialize
-  end
-
-  def vagon_cargo
-    @count_cargo
+    @index_station -=1 if @index_station > 0 
   end
 end
