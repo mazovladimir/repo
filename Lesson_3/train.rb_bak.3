@@ -53,6 +53,16 @@ class Train
     @speed = 0
   end
 
+  def vagon_attach
+    if @speed == 0 && @type == "passanger"
+      @vagon+=1
+      @count_passanger = @vagon
+    elsif @speed == 0 && @type == "cargo"
+      @vagon += 1
+      @count_cargo = @vagon
+    end
+  end
+
   def vagon_detach
     if @speed==0 && @vagon>0
       @vagon-=1
@@ -81,26 +91,33 @@ class Train
 end
 
 class PassangerTrain < Train
+  def self.count_p
+    if @speed == 0 && @type == "passanger"
+      @count_passanger = @vagon
+      @count_passanger += 1
+    end
+  end
 end
 
 class CargoTrain < Train
+  def count_c
+  end  
 end
 
 class PassangerVagon < Train
   def initialize
-    super
   end
-  def pvagon_attach
-    if @speed == 0 && @type == "passanger"
-      @vagon+=1
-      @count_passanger = @vagon
-    end
+
+  def vagon_passanger
+    @count_passanger
   end
 end
-  
+
 class CargoVagon < Train
-  if @speed == 0 && @type == "cargo"
-    @vagon+=1
-    @count_cargo = @vagon
+  def initialize
+  end
+
+  def vagon_cargo
+    @count_cargo
   end
 end
