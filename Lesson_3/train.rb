@@ -41,8 +41,6 @@ class Train
     @vagon = vagon
     @speed = 0
     @index_station = 0
-    @count_passanger = 0
-    @count_cargo = 0
   end
 
   def increase_speed
@@ -89,19 +87,21 @@ end
 class PassangerVagon < Train
   def initialize
     super(@number,@type,@vagon)
+    @count_passanger = @vagon
   end
 
   def pvagon_attach
     if @speed == 0 && @type == "passanger"
-      @vagon+=1
-      @count_passanger = @vagon
+      @count_passanger+=1
     end
   end
 end
   
 class CargoVagon < Train
-  if @speed == 0 && @type == "cargo"
-    @vagon+=1
-    @count_cargo = @vagon
+  def cvagon_attach
+    if @speed == 0 && @type == "cargo"
+      @count_cargo = @vagon
+      @count_cargo+=1
+    end
   end
 end
