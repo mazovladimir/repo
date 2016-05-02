@@ -35,10 +35,10 @@ end
 
 class Train
   attr_reader :speed, :vagon, :route
-  def initialize(number,type,vagon)
-    @number = number
-    @type = type
-    @vagon = vagon
+  def initialize
+    @number = 902
+    @type = "passanger"
+    @vagon = 10
     @speed = 0
     @index_station = 0
   end
@@ -49,6 +49,16 @@ class Train
 
   def break_speed
     @speed = 0
+  end
+
+  def vagon_attach
+    if @speed == 0 && @type == "passanger"
+      vP = PassangerVagon.new
+      vP.pvagon_attach
+    elsif @speed == 0 && @type == "cargo"
+      vC = CargoVagon.new
+      vC.cvagon_attach
+    end
   end
 
   def vagon_detach
@@ -86,22 +96,22 @@ end
 
 class PassangerVagon < Train
   def initialize
-    super(@number,@type,@vagon)
+    super
     @count_passanger = @vagon
   end
 
   def pvagon_attach
-    if @speed == 0 && @type == "passanger"
-      @count_passanger+=1
-    end
+    @count_passanger+=1
   end
 end
   
 class CargoVagon < Train
+  def initialize
+    super
+    @count_cargo = @vagon
+  end
+
   def cvagon_attach
-    if @speed == 0 && @type == "cargo"
-      @count_cargo = @vagon
-      @count_cargo+=1
-    end
+    @count_cargo+=1
   end
 end
