@@ -1,3 +1,32 @@
+#loop do
+#  puts "0. Create first and last station"
+#  puts "1. Add station"
+# puts "2. Create train"
+#  puts "3. Add railway carriage to train"
+#  puts "4. Detach railway carriage from train"
+#  puts "5. Move train to the station"
+#  puts "6. List trains on the station"
+#  puts "7. Exit"
+#
+#  print "Choose the action: "
+#  input = gets.chomp.to_i
+#  break if input == 7
+#
+#  case input
+#  when 0 
+#    print "Please create the first station: "
+#    fstation = gets.chomp.to_s
+#    print "Please create the last station: "
+#    lstation = gets.chomp.to_s
+#    s = Route.new("fstation", "lstation")
+#    puts s.stationS
+#    puts "The stations was created"
+#  
+#  when 6
+#     @stationS   
+#  end
+#end
+
 class Station
   attr_reader :count 
   def initialize(name)
@@ -35,10 +64,10 @@ end
 
 class Train
   attr_reader :speed, :vagon, :route
-  def initialize
-    @number = 902
-    @type = "passanger"
-    @vagon = 10
+  def initialize(number,type,vagon)
+    @number = number
+    @type = type
+    @vagon = vagon
     @speed = 0
     @index_station = 0
   end
@@ -51,16 +80,6 @@ class Train
     @speed = 0
   end
 
-  def vagon_attach
-    if @speed == 0 && @type == "passanger"
-      vP = PassangerVagon.new
-      vP.pvagon_attach
-    elsif @speed == 0 && @type == "cargo"
-      vC = CargoVagon.new
-      vC.cvagon_attach
-    end
-  end
-
   def vagon_detach
     if @speed==0 && @vagon>0
       @vagon-=1
@@ -71,6 +90,14 @@ class Train
 
   def route_inherit(path)
     @route = path.stationS
+  end
+
+  def vagon_attach
+    @vagon+=1
+  end
+
+  def vagon_detach
+    @vagon-=1 if @vagon > 0
   end
 
   def whatis_my_station
@@ -89,29 +116,43 @@ class Train
 end
 
 class PassangerTrain < Train
+  def initialize(number,type,vagon)
+    super
+  end
+
+  def vagon_attach
+    super
+  end
 end
 
 class CargoTrain < Train
-end
-
-class PassangerVagon < Train
-  def initialize
+  def initialize(number,type,vagon)
     super
-    @count_passanger = @vagon
   end
 
-  def pvagon_attach
-    @count_passanger+=1
+  def vagon_attach
+    super
+  end
+end
+
+class PassangerVagon < PassangerTrain
+   def initialize
+    super
+    @count_p = @vagon
+  end
+
+  def self.vagon_attach
+    @count_p+=1
   end
 end
   
-class CargoVagon < Train
+class CargoVagon < CargoTrain
   def initialize
     super
-    @count_cargo = @vagon
+    @count_c = @vagon
   end
 
-  def cvagon_attach
-    @count_cargo+=1
+  def self.vagon_attach
+    @count_c+=1
   end
 end
