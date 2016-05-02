@@ -138,10 +138,9 @@ end
 class PassangerVagon < PassangerTrain
    def initialize
     super
-    @count_p = @vagon
   end
 
-  def self.vagon_attach
+  def vagon_attach
     @count_p+=1
   end
 end
@@ -149,10 +148,9 @@ end
 class CargoVagon < CargoTrain
   def initialize
     super
-    @count_c = @vagon
   end
 
-  def self.vagon_attach
+  def vagon_attach
     @count_c+=1
   end
 end
