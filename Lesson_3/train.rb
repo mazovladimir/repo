@@ -88,8 +88,9 @@ end
 
 class PassangerVagon < Train
   def initialize
-    super
+    super(@number,@type,@vagon)
   end
+
   def pvagon_attach
     if @speed == 0 && @type == "passanger"
       @vagon+=1
