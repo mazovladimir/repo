@@ -6,7 +6,6 @@ require_relative 'cargo_train.rb'
 
 def self.addStation
   station = Station.new("s")
-  station
 end
 
 
