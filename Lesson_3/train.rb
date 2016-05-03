@@ -1,31 +1,31 @@
-#loop do
-#  puts "0. Create first and last station"
-#  puts "1. Add station"
-# puts "2. Create train"
-#  puts "3. Add railway carriage to train"
-#  puts "4. Detach railway carriage from train"
-#  puts "5. Move train to the station"
-#  puts "6. List trains on the station"
-#  puts "7. Exit"
-#
-#  print "Choose the action: "
-#  input = gets.chomp.to_i
-#  break if input == 7
-#
-#  case input
-#  when 0 
-#    print "Please create the first station: "
-#    fstation = gets.chomp.to_s
-#    print "Please create the last station: "
-#    lstation = gets.chomp.to_s
-#    s = Route.new("fstation", "lstation")
-#    puts s.stationS
-#    puts "The stations was created"
-#  
-#  when 6
-#     @stationS   
-#  end
-#end
+loop do
+  puts "0. Create first and last station"
+  puts "1. Add station"
+  puts "2. Create train"
+  puts "3. Add railway carriage to train"
+  puts "4. Detach railway carriage from train"
+  puts "5. Move train to the station"
+  puts "6. List trains on the station"
+  puts "7. Exit"
+
+  print "Choose the action: "
+  input = gets.chomp.to_i
+  break if input == 7
+
+  case input
+  when 0 
+    print "Please create the first station: "
+    fstation = gets.chomp.to_s
+    print "Please create the last station: "
+    lstation = gets.chomp.to_s
+    s = Route.new("fstation", "lstation")
+    puts s.stationS
+    puts "The stations was created"
+  
+  when 6
+     @stationS   
+  end
+end
 
 class Station
   attr_reader :count 

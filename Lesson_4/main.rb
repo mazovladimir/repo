@@ -4,7 +4,12 @@ require_relative 'train.rb'
 require_relative 'passanger_train.rb'
 require_relative 'cargo_train.rb'
 
-#station = Station.new("Kazan")
+def self.addStation
+  station = Station.new("s")
+  station
+end
+
+
 
 loop do
   puts "0. Create first and last station"
@@ -23,19 +28,9 @@ loop do
   case input
   when 1
     print "Enter the station name:  "
-    input = gets.chomp
-    station = Station.new(input)
+    s = gets.chomp
+    addStation
 
-  when 2
-    print "Enter the train number:  "
-    tnumber = gets.chomp
-    print "Enter the type of train passanger/cargo: "
-    ttrain = gets.chomp
-    print "Enter the number of railway carriage:  "
-    carriage = gets.chomp
-    passanger_train = PassangerTrain.new(tnumber,ttrain,carriage)
   when 6
-    station
   end
 end
-
