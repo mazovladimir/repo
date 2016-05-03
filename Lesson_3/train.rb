@@ -96,10 +96,6 @@ class Train
     @vagon+=1
   end
 
-  def vagon_detach
-    @vagon-=1 if @vagon > 0
-  end
-
   def whatis_my_station
     puts "Before station is: #{@route[@index_station-1]}" if @index_station > 0
     puts "Current station is: #{@route[@index_station]}"
@@ -116,41 +112,19 @@ class Train
 end
 
 class PassangerTrain < Train
-  def initialize(number,type,vagon)
-    super
-  end
-
-  def vagon_attach
-    super
-  end
 end
 
 class CargoTrain < Train
-  def initialize(number,type,vagon)
-    super
-  end
-
-  def vagon_attach
-    super
-  end
 end
 
-class PassangerVagon < PassangerTrain
-   def initialize
-    super
+class PassangerVagon < Train
+  def initialize
   end
 
   def vagon_attach
-    @count_p+=1
+    super
   end
 end
   
-class CargoVagon < CargoTrain
-  def initialize
-    super
-  end
-
-  def vagon_attach
-    @count_c+=1
-  end
+class CargoVagon < Train
 end
