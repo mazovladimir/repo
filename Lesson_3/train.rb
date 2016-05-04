@@ -1,32 +1,3 @@
-loop do
-  puts "0. Create first and last station"
-  puts "1. Add station"
-  puts "2. Create train"
-  puts "3. Add railway carriage to train"
-  puts "4. Detach railway carriage from train"
-  puts "5. Move train to the station"
-  puts "6. List trains on the station"
-  puts "7. Exit"
-
-  print "Choose the action: "
-  input = gets.chomp.to_i
-  break if input == 7
-
-  case input
-  when 0 
-    print "Please create the first station: "
-    fstation = gets.chomp.to_s
-    print "Please create the last station: "
-    lstation = gets.chomp.to_s
-    s = Route.new("fstation", "lstation")
-    puts s.stationS
-    puts "The stations was created"
-  
-  when 6
-     @stationS   
-  end
-end
-
 class Station
   attr_reader :count 
   def initialize(name)
@@ -84,12 +55,10 @@ class Train
     @route = path.stationS
   end
 
-  def vagon_attach
-    if @type == "passanger" && @speed == 0
-      @vagon+=1
-    elsif @type == "cargo" && @speed == 0
-      @vagon+=1
-    end
+  def vagon_attach(vagon)
+    if @speed == 0
+      @vagon+=1 if vagon_allowed?(vagon)
+    end  
   end
 
   def whatis_my_station
@@ -116,13 +85,19 @@ class Train
 end
 
 class PassangerTrain < Train
-  def vagon_attach
-    super
+  def vagon_allowed?(vagon)
+    vagon.class == PassangerVagon
   end
 end
 
 class CargoTrain < Train
-  def vagon_attach
-    super
+  def vagon_allowed?(vagon)
+    vagon.class == CargoVagon
   end
+end
+
+class PassangerVagon
+end
+
+class CargoVagon
 end
