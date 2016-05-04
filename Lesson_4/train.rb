@@ -1,5 +1,5 @@
 class Train
-  attr_reader :speed, :vagon, :route
+  attr_reader :speed, :vagon, :route, :type
   def initialize(number,type,vagon)
     @number = number
     @type = type
@@ -8,24 +8,20 @@ class Train
     @index_station = 0
   end
 
-  def vagon_detach
-    if @speed==0 && @vagon>0 && @type == "passanger"
-      @vagon-=1
-    elsif @speed==0 && @vagon>0 && @type == "cargo"
-      @vagon-=1
-    end
-  end
-
   def route_inherit(path)
     @route = path.stationS
   end
 
-  def vagon_attach
-    if @type == "passanger" && @speed == 0
-      @vagon+=1
-    elsif @type == "cargo" && @speed == 0
-      @vagon+=1
-    end
+  def vagon_attach(va)
+    if @speed == 0
+      @vagon+=1 if vagon_allowed?(va)
+    end  
+  end
+
+  def vagon_detach(va)
+    if @speed == 0
+      @vagon-=1 if vagon_allowed?(va) && @vagon > 0
+    end  
   end
 
   def whatis_my_station
@@ -48,5 +44,20 @@ class Train
 
   def before_station
     @index_station -=1 if @index_station > 0
+  end
+end
+class PassangerTrain < Train
+  protected
+
+  def vagon_allowed?(va)
+    va.class == PassangerVagon
+  end
+end
+
+class CargoTrain < Train
+  protected
+
+  def vagon_allowed?(va)
+    va.class == CargoVagon
   end
 end

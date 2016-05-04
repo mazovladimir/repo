@@ -6,12 +6,12 @@ class Station
   end
 
   def in_train
-    count += 1
+    @count += 1
   end
 
   def out_train
-    if count > 0
-      count -= 1
+    if @count > 0
+      @count -= 1
     else
       puts "Vagonov net"
     end

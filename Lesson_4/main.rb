@@ -1,14 +1,8 @@
-require_relative 'station.rb'
-require_relative 'route.rb'
-require_relative 'train.rb'
-require_relative 'passanger_train.rb'
-require_relative 'cargo_train.rb'
-
-def self.addStation
-  station = Station.new("s")
-end
-
-
+require_relative 'station'
+require_relative 'route'
+require_relative 'train'
+require_relative 'cargo_vagon'
+require_relative 'passanger_vagon'
 
 loop do
   puts "0. Create first and last station"
@@ -25,11 +19,20 @@ loop do
   break if input == 7
 
   case input
-  when 1
-    print "Enter the station name:  "
-    s = gets.chomp
-    addStation
+  when 2
+    print "Please enter the train number:  "
+    tNumber = gets.chomp
+    print "Please enter the train type passanger/cargo:  "
+    tType = gets.chomp.to_s
+    print "Please etner the number of vagons:  "
+    tVagon = gets.chomp.to_i
+    train = Train.new(tNumber,tType,tVagon)
+    puts "The #{train.type} train was created..."
+    puts ""
 
-  when 6
+  when 3
+    train.vagon_attach(tVagon)
+    puts "The railway carriage was added to the #{train.type} train..."
+    puts "Now the train has #{train.vagon} vagonov..."
   end
 end
