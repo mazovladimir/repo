@@ -43,21 +43,19 @@ class Train
     @index_station = 0
   end
 
-  def vagon_detach
-    if @speed==0 && @vagon>0 && @type == "passanger"
-      @vagon-=1
-    elsif @speed==0 && @vagon>0 && @type == "cargo"
-      @vagon-=1
-    end
-  end
-
   def route_inherit(path)
     @route = path.stationS
   end
 
-  def vagon_attach(vagon)
+  def vagon_attach(va)
     if @speed == 0
-      @vagon+=1 if vagon_allowed?(vagon)
+      @vagon+=1 if vagon_allowed?(va)
+    end  
+  end
+
+  def vagon_detach(va)
+    if @speed == 0
+      @vagon-=1 if vagon_allowed?(va) && @vagon > 0
     end  
   end
 
@@ -85,14 +83,14 @@ class Train
 end
 
 class PassangerTrain < Train
-  def vagon_allowed?(vagon)
-    vagon.class == PassangerVagon
+  def vagon_allowed?(va)
+    va.class == PassangerVagon
   end
 end
 
 class CargoTrain < Train
-  def vagon_allowed?(vagon)
-    vagon.class == CargoVagon
+  def vagon_allowed?(va)
+    va.class == CargoVagon
   end
 end
 
