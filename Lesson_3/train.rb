@@ -83,12 +83,16 @@ class Train
 end
 
 class PassangerTrain < Train
+  protected
+
   def vagon_allowed?(va)
     va.class == PassangerVagon
   end
 end
 
 class CargoTrain < Train
+  protected
+
   def vagon_allowed?(va)
     va.class == CargoVagon
   end
