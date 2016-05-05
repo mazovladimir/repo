@@ -1,5 +1,9 @@
+require_relative 'CompanyName'
+
 class Train
-  attr_reader :speed, :vagon, :route, :type, :vagons, :number
+  include CompanyName
+
+  attr_reader :speed, :vagon, :route, :type, :vagons, :number, :company
   def initialize(number,type,vagon)
     @number = number
     @type = type
@@ -15,6 +19,10 @@ class Train
 
   def vagon_attach(va)
       @vagons << va if vagon_allowed?(va) && @speed == 0
+  end
+
+  def self.find(number)
+      puts "#{self.object_id}"
   end
 
   def vagon_detach(va)
