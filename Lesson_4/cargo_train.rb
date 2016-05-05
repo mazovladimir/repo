@@ -1,5 +1,7 @@
 class CargoTrain < Train
-  def vagon_attach
-    super
+  protected
+
+  def vagon_allowed?(va)
+    va.class == CargoVagon
   end
 end

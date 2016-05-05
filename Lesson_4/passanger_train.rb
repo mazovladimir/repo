@@ -1,5 +1,7 @@
 class PassangerTrain < Train
-  def vagon_attach
-    super
+  protected
+
+  def vagon_allowed?(va)
+    va.class == PassangerVagon
   end
 end
