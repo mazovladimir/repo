@@ -2,6 +2,7 @@ require_relative 'CompanyName'
 
 class Train
   include CompanyName
+  @@train_hash = {}
 
   attr_reader :speed, :vagon, :route, :type, :vagons, :number, :company
   def initialize(number,type,vagon)
@@ -11,6 +12,7 @@ class Train
     @speed = 0
     @index_station = 0
     @vagons = []
+    @@train_hash[self.number] = self
   end
 
   def route_inherit(path)
@@ -21,8 +23,8 @@ class Train
       @vagons << va if vagon_allowed?(va) && @speed == 0
   end
 
-  def self.find(number)
-      puts "#{self.object_id}"
+  def self.find
+    puts @@train_hash
   end
 
   def vagon_detach(va)

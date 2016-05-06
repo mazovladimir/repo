@@ -1,9 +1,6 @@
 module CompanyName
+  attr_accessor :company
   def company_name(company)
-    @company = company
-  end
-
-  def show_name
-    puts @company
+    @company = self.company
   end
 end

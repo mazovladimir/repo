@@ -5,7 +5,7 @@ class Station
     @name = name
     @count = 0
     @my_trains = []
-    @@my_stations << name
+    @@my_stations << self
   end
 
   def self.all
