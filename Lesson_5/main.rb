@@ -64,15 +64,17 @@ puts "New vagon was attached to the passanger train, the train has #{pTrain.vago
 cTrain.vagon_attach(cVagon)
 puts "New vagon was attached to the cargo train, the train has #{cTrain.vagons}  vagons"
 
-pTrain.company = "ONE"
-pTrain.company
+pTrain.company_name = "ONE"
+puts pTrain.company_name
 
-pVagon.company = "TWO"
-pVagon.company
+pVagon.company_name = "TWO"
+puts pVagon.company_name
 
-cVagon.company = "THREE"
-cVagon.company
+cVagon.company_name = "THREE"
+puts cVagon.company_name
 
 puts "Stations #{Station.all} is available now... "
 
-Train.find
+Train.find(801)
+Train.find(902)
+Train.find(903)

@@ -1,6 +1,3 @@
 module CompanyName
-  attr_accessor :company
-  def company_name(company)
-    @company = self.company
-  end
+  attr_accessor :company_name
 end

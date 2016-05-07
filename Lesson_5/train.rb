@@ -4,7 +4,7 @@ class Train
   include CompanyName
   @@train_hash = {}
 
-  attr_reader :speed, :vagon, :route, :type, :vagons, :number, :company
+  attr_reader :speed, :vagon, :route, :type, :vagons, :number
   def initialize(number,type,vagon)
     @number = number
     @type = type
@@ -23,8 +23,8 @@ class Train
       @vagons << va if vagon_allowed?(va) && @speed == 0
   end
 
-  def self.find
-    puts @@train_hash
+  def self.find(number)
+    puts @@train_hash[number]
   end
 
   def vagon_detach(va)
