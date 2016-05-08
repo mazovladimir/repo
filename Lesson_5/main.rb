@@ -51,6 +51,9 @@ puts "New Station was created #{station3.name}"
 pTrain = PassangerTrain.new(801,"passanger",5)
 puts "New passanger train #{pTrain.number} was created..."
 
+pTrain = PassangerTrain.new(802,"passanger",50)
+puts "New passanger train #{pTrain.number} was created..."
+
 cTrain = CargoTrain.new(902,"cargo",20)
 puts "New cargo train #{cTrain.number} was created..."
 
@@ -78,3 +81,6 @@ puts "Stations #{Station.all} is available now... "
 Train.find(801)
 Train.find(902)
 Train.find(903)
+
+Train.instances
+Train.register_instance

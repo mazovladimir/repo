@@ -1,9 +1,11 @@
 require_relative 'CompanyName'
+require_relative 'InstanceCounter'
 
 class Train
   include CompanyName
+  extend InstanceCounter::ClassMethods
+  extend InstanceCounter::InstanceMethods
   @@train_hash = {}
-
   attr_reader :speed, :vagon, :route, :type, :vagons, :number
   def initialize(number,type,vagon)
     @number = number
@@ -24,7 +26,7 @@ class Train
   end
 
   def self.find(number)
-    puts @@train_hash[number]
+    @@train_hash[number]
   end
 
   def vagon_detach(va)
