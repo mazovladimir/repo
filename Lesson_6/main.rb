@@ -45,14 +45,16 @@ class MyMenu
         print "Please enter the number of vagons: "
         v = gets.chomp
         @t = create_train(n,t,v)
-        puts @t
+        p @t
 
       when 3
         puts "Which train do you want to use ?"
-        puts ObjectSpace.each_object(Train) {|x| puts "#{x} - #{x.object_id}"
+        puts ObjectSpace.each_object(Train) {|x| puts "#{x} - #{x.object_id}"}
+
       when 5
         puts "Which train do you want to use ?"
         puts ObjectSpace.each_object(Train) {|x| puts "#{x} - #{x.object_id}"}
+
       when 6
         @fl.stationS
       end
