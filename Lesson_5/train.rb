@@ -3,8 +3,7 @@ require_relative 'InstanceCounter'
 
 class Train
   include CompanyName
-  extend InstanceCounter::ClassMethods
-  extend InstanceCounter::InstanceMethods
+  include InstanceCounter
   @@train_hash = {}
   attr_reader :speed, :vagon, :route, :type, :vagons, :number
   def initialize(number,type,vagon)

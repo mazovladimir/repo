@@ -83,4 +83,4 @@ Train.find(902)
 Train.find(903)
 
 Train.instances
-Train.register_instance
+cTrain.register_instance
