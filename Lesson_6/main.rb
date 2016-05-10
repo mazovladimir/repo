@@ -8,8 +8,8 @@ require_relative 'passanger_train'
 
 class MyMenu
   @t = []
-  @pVagon = PassangerVagon.new
-  @cVagon = CargoVagon.new
+  @pTrain = []
+  @cTrain = []
   def self.menu
     loop do
       puts "0. Create first and last station"
@@ -28,60 +28,79 @@ class MyMenu
       case input
 
       when 0
-        print "Enter the first station: "
-        f = gets.chomp
-        print "Enter the last station: "
-        l = gets.chomp
-        @fl = fandlstations(f,l)
-        p @fl
+        fandlstations
       when 1
-        print "Please enter the station name: "
-        st_name = gets.chomp
-        @sn = @fl.add_station(st_name)
-        p @sn
-
+        add_station
       when 2
-        print "Please enter the number train: "
-        n = gets.chomp
-        print "Please enter the type passanger/cargo: "
-        t = gets.chomp
-        print "Please enter the number of vagons: "
-        v = gets.chomp
-        @t << create_train(n,t,v)
-        p @t
-
+        create_train
       when 3
-        puts "Which train do you want to use ?"
-        puts @t 
-        print "Type the number of train: " 
-        @v = gets.chomp.to_i
-        @inst_train = @t[@v-1]
-        @inst_train.vagon_attach(@cVagon)
-        
-
+        new_vagon_attach
       when 5
         puts "Which train do you want to use ?"
-        puts ObjectSpace.each_object(Train) {|x| puts "#{x} - #{x.object_id}"}
+        puts @t
+        @move_t = gets.chomp
+        puts "Which station do you want to use ?"
+        p @sn
 
       when 6
         Train.self
       end
     end
   end
+
+private
+
+def self.fandlstations
+  print "Enter the first station: "
+  f = gets.chomp
+  print "Enter the last station: "
+  l = gets.chomp
+  @fl = Route.new(f,l)
+  p @fl
 end
 
-def fandlstations(first,last)
-  Route.new(first,last)
+def self.add_station
+  print "Please enter the station name: "
+  st_name = gets.chomp
+  @sn = @fl.add_station(st_name)
+  p @sn
 end
 
-def create_train(n,t,v)
-  Train.new(n,t,v)
+def self.create_train
+  print "Please enter the number train: "
+  @n = gets.chomp
+  print "Please enter the type passanger/cargo: "
+  @t = gets.chomp
+  print "Please enter the number of vagons: "
+  @v = gets.chomp
+  
+  @pTrain << PassangerTrain.new(@n,@t,@v) if @t == 'passanger'
+  @cTrain << CargoTrain.new(@n,@t,@v) if @t == 'cargo'
+
+  p @pTrain
+  p @cTrain
 end
 
-def move_train
+def self.new_vagon_attach
+  puts "Which train do you want to use ?"
+  puts @pTrain
+  puts @cTrain
+  puts
+  print "My choice is: "
+
+  @w_t = gets.chomp.to_i
+
+  @pVagon = PassangerVagon.new if @w_t.class == PassangerTrain
+  @cVagon = CargoVagon.new if @w_t.class == CargoTrain
+  p @pVagon
+  p @cVagon
+end
+
+def move_train(new)
   Station.new
 end
 
+end
 
 MyMenu.menu
 
