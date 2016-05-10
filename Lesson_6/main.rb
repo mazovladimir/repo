@@ -7,6 +7,9 @@ require_relative 'cargo_train'
 require_relative 'passanger_train'
 
 class MyMenu
+  @t = []
+  @pVagon = PassangerVagon.new
+  @cVagon = CargoVagon.new
   def self.menu
     loop do
       puts "0. Create first and last station"
@@ -44,19 +47,24 @@ class MyMenu
         t = gets.chomp
         print "Please enter the number of vagons: "
         v = gets.chomp
-        @t = create_train(n,t,v)
+        @t << create_train(n,t,v)
         p @t
 
       when 3
         puts "Which train do you want to use ?"
-        puts ObjectSpace.each_object(Train) {|x| puts "#{x} - #{x.object_id}"}
+        puts @t 
+        print "Type the number of train: " 
+        @v = gets.chomp.to_i
+        @inst_train = @t[@v-1]
+        @inst_train.vagon_attach(@cVagon)
+        
 
       when 5
         puts "Which train do you want to use ?"
         puts ObjectSpace.each_object(Train) {|x| puts "#{x} - #{x.object_id}"}
 
       when 6
-        @fl.stationS
+        Train.self
       end
     end
   end
@@ -73,9 +81,6 @@ end
 def move_train
   Station.new
 end
-
-
-
 
 
 MyMenu.menu
