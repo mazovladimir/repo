@@ -98,11 +98,8 @@ def self.new_vagon_detach
   print "My choice is: "
   @d_v = gets.chomp
   @delete_use_train = Train.find(@d_v)
-  if @delete_use_train.class == PassangerTrain
-    @delete_use_train.vagon_detach(@pVagon)
-  elsif @delete_use_train.class == CargoTrain
-    @delete_use_train.vagon_detach(@cVagon)
-  end
+  @delete_use_train.vagon_detach(@pVagon)
+  @delete_use_train.vagon_detach(@cVagon)
   p @delete_use_train
 end
 
@@ -114,6 +111,7 @@ def self.move_train
   @select_train = Train.find(@m_t)
   puts "Which station do you want to move the train ?"
   p @fl.stationS
+  @choose_station = @fl.stationS
   @m_st = gets.chomp
   @select_train.route_inherit(@fl)
 end
@@ -123,6 +121,7 @@ def self.where_am_i
   puts Train.my_trains
   print "My choice is: "
   @iam = gets.chomp
+  @select_train.change_index(@m_st)
   @list_train = Train.find(@iam)
   @list_train.whatis_my_station
 end
@@ -130,34 +129,3 @@ end
 end
 
 MyMenu.menu
-
-#station1 = Station.new("Kazan")
-#puts "New Station was created #{station1.name}"
-#station2 = Station.new("Moscow")
-#puts "New Station was created #{station2.name}"
-#station3 = Station.new("Samara")
-#puts "New Station was created #{station3.name}"
-#pTrain = PassangerTrain.new(801,"passanger",5)
-#puts "New passanger train #{pTrain.number} was created..."
-#pTrain = PassangerTrain.new(802,"passanger",50)
-#puts "New passanger train #{pTrain.number} was created..."
-#cTrain = CargoTrain.new(902,"cargo",20)
-#puts "New cargo train #{cTrain.number} was created..."
-#pVagon = PassangerVagon.new
-#cVagon = CargoVagon.new
-#pTrain.vagon_attach(pVagon)
-#puts "New vagon was attached to the passanger train, the train has #{pTrain.vagons} vagons"
-#cTrain.vagon_attach(cVagon)
-#puts "New vagon was attached to the cargo train, the train has #{cTrain.vagons}  vagons"
-#pTrain.company_name = "ONE"
-#puts pTrain.company_name
-#pVagon.company_name = "TWO"
-#puts pVagon.company_name
-#cVagon.company_name = "THREE"
-#puts cVagon.company_name
-#puts "Stations #{Station.all} is available now... "
-#Train.find(801)
-#Train.find(902)
-#Train.find(903)
-#Train.instances
-#cTrain.register_instance

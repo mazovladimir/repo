@@ -33,7 +33,11 @@ class Train
   end
 
   def vagon_detach(va)
-    @vagons.delete(va) if @speed == 0 #&& @vagons.any?
+    @vagons.delete(va) if @speed == 0 && @vagons.any?
+  end
+
+  def change_index(choice)
+    @index_station = @route.index(choice)
   end
 
   def whatis_my_station
