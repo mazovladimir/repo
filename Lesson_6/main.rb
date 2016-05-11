@@ -36,12 +36,7 @@ class MyMenu
       when 4
         new_vagon_detach
       when 5
-        puts "Which train do you want to use ?"
-        puts @t
-        @move_t = gets.chomp
-        puts "Which station do you want to use ?"
-        p @sn
-
+        move_train
       when 6
         Train.self
       end
@@ -102,17 +97,26 @@ def self.new_vagon_detach
   puts Train.my_trains
   print "My choice is: "
   @d_v = gets.chomp
-  @use_train = Train.find(@d_v)
-  if @use_train.class == PassangerTrain
-    @use_train.vagon_detach(@pVagon)
-  elsif @use_train.class == CargoTrain
-    @use_train.vagon_detach(@cVagon)
+  @delete_use_train = Train.find(@d_v)
+  if @delete_use_train.class == PassangerTrain
+    @delete_use_train.vagon_detach(@pVagon)
+  elsif @delete_use_train.class == CargoTrain
+    @delete_use_train.vagon_detach(@cVagon)
   end
-  p @use_train
+  p @delete_use_train
 end
 
-def move_train(new)
-  Station.new
+def self.move_train
+  puts "Which train do you want to use ?"
+  puts Train.my_trains
+  print "My choice is: "
+  @m_t = gets.chomp
+  @select_train = Train.find(@m_t)
+  puts "Which station do you want to move the train ?"
+  p @fl.stationS
+  @m_st = gets.chomp
+  @select_train.route_inherit(@fl)
+  
 end
 
 end
