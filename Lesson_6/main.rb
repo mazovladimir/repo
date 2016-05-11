@@ -83,10 +83,10 @@ def self.new_vagon_attach
   @w_t = gets.chomp
   @use_train = Train.find(@w_t)
   if @use_train.class == PassangerTrain
-    @pVagon = PassangerVagon.new
+    @pVagon = PassangerVagon.new if @pVagon.nil?
     @use_train.vagon_attach(@pVagon)
   elsif @use_train.class == CargoTrain
-    @cVagon = CargoVagon.new
+    @cVagon = CargoVagon.new if @cVagon.nil?
     @use_train.vagon_attach(@cVagon)
   end
   p @use_train
