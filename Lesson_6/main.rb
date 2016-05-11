@@ -8,8 +8,6 @@ require_relative 'passanger_train'
 
 class MyMenu
   @t = []
-  @pTrain = []
-  @cTrain = []
   def self.menu
     loop do
       puts "0. Create first and last station"
@@ -35,6 +33,8 @@ class MyMenu
         create_train
       when 3
         new_vagon_attach
+      when 4
+        new_vagon_detach
       when 5
         puts "Which train do you want to use ?"
         puts @t
@@ -74,8 +74,8 @@ def self.create_train
   print "Please enter the number of vagons: "
   @v = gets.chomp
   
-  @pTrain << PassangerTrain.new(@n,@t,@v) if @t == 'passanger'
-  @cTrain << CargoTrain.new(@n,@t,@v) if @t == 'cargo'
+  @pTrain = PassangerTrain.new(@n,@t,@v) if @t == 'passanger'
+  @cTrain = CargoTrain.new(@n,@t,@v) if @t == 'cargo'
 
   p @pTrain
   p @cTrain
@@ -83,17 +83,32 @@ end
 
 def self.new_vagon_attach
   puts "Which train do you want to use ?"
-  puts @pTrain
-  puts @cTrain
-  puts
+  puts Train.my_trains
   print "My choice is: "
+  @w_t = gets.chomp
+  @use_train = Train.find(@w_t)
+  if @use_train.class == PassangerTrain
+    @pVagon = PassangerVagon.new
+    @use_train.vagon_attach(@pVagon)
+  elsif @use_train.class == CargoTrain
+    @cVagon = CargoVagon.new
+    @use_train.vagon_attach(@cVagon)
+  end
+  p @use_train
+end
 
-  @w_t = gets.chomp.to_i
-
-  @pVagon = PassangerVagon.new if @w_t.class == PassangerTrain
-  @cVagon = CargoVagon.new if @w_t.class == CargoTrain
-  p @pVagon
-  p @cVagon
+def self.new_vagon_detach
+  puts "Which train do you want to use ?"
+  puts Train.my_trains
+  print "My choice is: "
+  @d_v = gets.chomp
+  @use_train = Train.find(@d_v)
+  if @use_train.class == PassangerTrain
+    @use_train.vagon_detach(@pVagon)
+  elsif @use_train.class == CargoTrain
+    @use_train.vagon_detach(@cVagon)
+  end
+  p @use_train
 end
 
 def move_train(new)

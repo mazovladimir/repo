@@ -28,8 +28,12 @@ class Train
     @@train_hash[number]
   end
 
+  def self.my_trains
+    @@train_hash.keys
+  end
+
   def vagon_detach(va)
-    @vagons.delete(va) if @speed == 0 && @vagon > 0
+    @vagons.delete(va) if @speed == 0 #&& @vagons.any?
   end
 
   def whatis_my_station
