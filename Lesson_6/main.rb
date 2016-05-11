@@ -38,7 +38,7 @@ class MyMenu
       when 5
         move_train
       when 6
-        Train.self
+        where_am_i
       end
     end
   end
@@ -116,7 +116,15 @@ def self.move_train
   p @fl.stationS
   @m_st = gets.chomp
   @select_train.route_inherit(@fl)
-  
+end
+
+def self.where_am_i
+  puts "Which train do you want to use ?"
+  puts Train.my_trains
+  print "My choice is: "
+  @iam = gets.chomp
+  @list_train = Train.find(@iam)
+  @list_train.whatis_my_station
 end
 
 end
