@@ -2,7 +2,7 @@ require_relative 'CompanyName'
 require_relative 'InstanceCounter'
 
 class Train
-  NUMBER_FORMAT = /^(\d{3,}||[a-z]{3,})-?(\d{2,}||[a-z]{2,})$/i
+  NUMBER_FORMAT = /^(\d{3,}|[a-z]{3,})-?(\d{2,}|[a-z]{2,})$/i
   include CompanyName
   include InstanceCounter
   @@train_hash = {}
@@ -75,9 +75,9 @@ class Train
   def validate!
     raise "Incorrect format of the number" if number !~ NUMBER_FORMAT
     raise "The correct type is needed for the class [passanger/cargo]" if ((type != 'passanger') && (type != 'cargo'))
-    raise "The type can't be empty" if type.nil?
+    raise "The type can't be empty" if type.empty?
     raise "Please correct the number of vagons" if (vagon < 0) || (vagon > 20)
-    raise "The number of vagons cannot be empty" if number.empty?
+    raise "The number of train cannot be empty" if number.empty?
     true
   end
 end
