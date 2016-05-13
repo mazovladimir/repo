@@ -25,13 +25,6 @@ class Train
     false
   end
 
-  def validate!
-    raise "Incorrect format of the number" if number !~ NUMBER_FORMAT
-    raise "The correct type is needed for the class [passanger/cargo]" if (type != 'passanger') && (type != 'cargo') || type.nil?
-    raise "Please correct the number of vagons" if (vagon < 0) && (vagon > 20) || vagon.nil?
-    true
-  end
-
   def route_inherit(path)
     @route = path.stationS
   end
@@ -76,5 +69,13 @@ class Train
 
   def before_station
     @index_station -=1 if @index_station > 0
+  end
+
+  protected
+  def validate!
+    raise "Incorrect format of the number" if number !~ NUMBER_FORMAT
+    raise "The correct type is needed for the class [passanger/cargo]" if (type != 'passanger') && (type != 'cargo') || type.nil?
+    raise "Please correct the number of vagons" if (vagon < 0) && (vagon > 20) || vagon.nil?
+    true
   end
 end

@@ -61,7 +61,6 @@ def self.add_station
 end
 
 def self.create_train
-  begin
     print "Please enter the number train: "
     @n = gets.chomp
     print "Please enter the type passanger/cargo: "
@@ -69,18 +68,14 @@ def self.create_train
     print "Please enter the number of vagons: "
     @v = gets.chomp.to_i
   
-    raise "Incorrect format of the number" if @n !~ CHECK_NUMBER
-    raise "The correct type is needed for the class [passanger/cargo]" if (@t != 'passanger') && (@t != 'cargo') || @t.empty?
-    raise "Please correct the number of vagons" if (@v < 0) || (@v > 20) 
-
-    rescue Exception => e
-      puts e
-      retry
-
-   end 
+    #rescue Exception => e
+    #  puts e
+    #  retry
+  begin
     @pTrain = PassangerTrain.new(@n,@t,@v) if @t == 'passanger'
     @cTrain = CargoTrain.new(@n,@t,@v) if @t == 'cargo'
-
+    raise
+  end
     puts "The train was successfully created"
 end
 
