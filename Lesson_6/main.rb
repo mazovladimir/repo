@@ -67,7 +67,7 @@ def self.create_train
     @t = gets.chomp
     print "Please enter the number of vagons: "
     @v = gets.chomp
-
+    raise "The number of the train can't be empty" if @n.empty?
     raise "Please use passanger/cargo train" if (@t != 'passanger') && (@t != 'cargo')
 
     @pTrain = PassangerTrain.new(@n,@t,@v) if @t == 'passanger'
