@@ -62,14 +62,17 @@ end
 def self.create_train
   begin
     print "Please enter the number train: "
-    @n = gets.chomp.to_s
+    @n = gets.chomp
     print "Please enter the type passanger/cargo: "
-    @t = gets.chomp.to_s
+    @t = gets.chomp
     print "Please enter the number of vagons: "
     @v = gets.chomp.to_i
 
+    raise "Please use passanger/cargo train" if (@t != 'passanger') || (@t != 'cargo')
+
     @pTrain = PassangerTrain.new(@n,@t,@v) if @t == 'passanger'
     @cTrain = CargoTrain.new(@n,@t,@v) if @t == 'cargo'
+
      
   rescue RuntimeError => e
     puts e

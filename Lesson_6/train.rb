@@ -74,10 +74,7 @@ class Train
   protected
   def validate!
     raise "Incorrect format of the number" if number !~ NUMBER_FORMAT
-    raise "The correct type is needed for the class [passanger/cargo]" if ((type != 'passanger') && (type != 'cargo'))
-    raise "The type can't be empty" if type.empty?
-    raise "Please correct the number of vagons" if (vagon < 0) || (vagon > 20)
-    raise "The number of train cannot be empty" if number.empty?
+    raise "Please correct the number of vagons" if (vagon < 0) || (vagon > 20) 
     true
   end
 end
