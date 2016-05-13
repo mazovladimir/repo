@@ -66,7 +66,7 @@ def self.create_train
     print "Please enter the type passanger/cargo: "
     @t = gets.chomp
     print "Please enter the number of vagons: "
-    @v = gets.chomp.to_i
+    @v = gets.chomp
 
     raise "Please use passanger/cargo train" if (@t != 'passanger') && (@t != 'cargo')
 

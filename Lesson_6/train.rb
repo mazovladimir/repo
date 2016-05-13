@@ -74,7 +74,7 @@ class Train
   protected
   def validate!
     raise "Incorrect format of the number" if number !~ NUMBER_FORMAT
-    raise "Please correct the number of vagons" if (vagon < 0) || (vagon > 20) 
+    raise "Please correct the number of vagons" if (vagon.to_i < 0) || (vagon.to_i > 20) || vagon.empty?
     true
   end
 end
