@@ -12,11 +12,11 @@ class Train
     @number = number
     @type = type
     @vagon = vagon
+    validate!
     @speed = 0
     @index_station = 0
     @vagons = []
     @@train_hash[self.number] = self
-    validate!
   end
   
   def valid?
@@ -74,8 +74,10 @@ class Train
   protected
   def validate!
     raise "Incorrect format of the number" if number !~ NUMBER_FORMAT
-    raise "The correct type is needed for the class [passanger/cargo]" if (type != 'passanger') && (type != 'cargo') || type.nil?
-    raise "Please correct the number of vagons" if (vagon < 0) && (vagon > 20) || vagon.nil?
+    raise "The correct type is needed for the class [passanger/cargo]" if ((type != 'passanger') && (type != 'cargo'))
+    raise "The type can't be empty" if type.nil?
+    raise "Please correct the number of vagons" if (vagon < 0) || (vagon > 20)
+    raise "The number of vagons cannot be empty" if number.empty?
     true
   end
 end

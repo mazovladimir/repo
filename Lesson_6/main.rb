@@ -7,7 +7,6 @@ require_relative 'cargo_train'
 require_relative 'passanger_train'
 
 class MyMenu
-  CHECK_NUMBER = /^(\d{3,}||[a-z]{3,})-?(\d{2,}||[a-z]{2,})$/i
   @t = []
   def self.menu
     loop do
@@ -61,22 +60,23 @@ def self.add_station
 end
 
 def self.create_train
+  begin
     print "Please enter the number train: "
-    @n = gets.chomp
+    @n = gets.chomp.to_s
     print "Please enter the type passanger/cargo: "
-    @t = gets.chomp
+    @t = gets.chomp.to_s
     print "Please enter the number of vagons: "
     @v = gets.chomp.to_i
-  
-    #rescue Exception => e
-    #  puts e
-    #  retry
-  begin
+
     @pTrain = PassangerTrain.new(@n,@t,@v) if @t == 'passanger'
     @cTrain = CargoTrain.new(@n,@t,@v) if @t == 'cargo'
-    raise
-  end
-    puts "The train was successfully created"
+     
+  rescue RuntimeError => e
+    puts e
+    puts
+    retry
+  end  
+      puts "The train was successfully created"
 end
 
 
