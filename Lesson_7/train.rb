@@ -18,6 +18,10 @@ class Train
     @vagons = []
     @@train_hash[self.number] = self
   end
+
+  def check_train_vagons
+    self.vagons.each {|v| p v}
+  end
   
   def valid?
     validate!
@@ -53,6 +57,10 @@ class Train
     puts "Before station is: #{@route[@index_station-1]}" if @index_station > 0
     puts "Current station is: #{@route[@index_station]}"
     puts "Next station is: #{@route[@index_station+1]}"
+  end
+
+  def current_station
+    @route[@index_station]
   end
 
   def increase_speed

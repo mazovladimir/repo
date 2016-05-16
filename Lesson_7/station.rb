@@ -1,13 +1,20 @@
 class Station
   @@my_stations = []
-  attr_reader :count, :name, :my_trains
-  attr_writer :name
+  attr_reader :count, :name, :my_trains, :my_name
+  attr_writer :name, :my_name
   def initialize(name)
     @name = name
     validate_station!
     @count = 0
     @my_trains = []
     @@my_stations << self
+  end
+
+  def list_train_station
+    ObjectSpace.each_object(Train) do |x| 
+      @my_name = @name
+      puts "#{x} is on the #{x.current_station} station" if x.current_station.to_s == @my_name
+    end
   end
 
   def valid_station?
