@@ -12,7 +12,7 @@ class Station
 
   def list_train_station
     @my_trains.each do |x| 
-      yield
+      yield(x)
     end
   end
 

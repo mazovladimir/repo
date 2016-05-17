@@ -21,7 +21,7 @@ class Train
 
   def check_train_vagons
     vagons.each do |v|
-      yield 
+      yield(v)
     end
   end
   

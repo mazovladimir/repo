@@ -1,8 +1,8 @@
 class PassangerTrain < Train
   def initialize(number,type,vagon,place)
+    super(number,type,vagon)
     @place = place
     @all_place = place
-    super(number,type,vagon)
   end
 
   def count_busy_place
@@ -26,7 +26,5 @@ class PassangerTrain < Train
 
   def register_instance
     @count_inst = ObjectSpace.each_object(self).to_a.size+=1
-#    puts @count_inst
   end
 end
-

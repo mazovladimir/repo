@@ -17,11 +17,12 @@ class MyMenu
       puts "4. Detach railway carriage from train"
       puts "5. Move train to the station"
       puts "6. List trains on the station"
-      puts "7. Exit"
+      puts "7. List vagons on the train"
+      puts "8. Exit"
 
       print "Choose the action: "
       input = gets.chomp.to_i
-      break if input == 7
+      break if input == 8
 
       case input
 
@@ -39,6 +40,8 @@ class MyMenu
         move_train
       when 6
         where_am_i
+      when 7
+        show_vagons
       end
     end
   end
@@ -67,11 +70,19 @@ def self.create_train
     @t = gets.chomp
     print "Please enter the number of vagons: "
     @v = gets.chomp
+    if @t == 'passanger'
+      print "Please enter the number of places: "
+      @p = gets.chomp 
+    elsif @t == 'cargo'
+      print "Please enter the volume: "
+      @vol = gets.chomp
+    end
+      
     raise "The number of the train can't be empty" if @n.empty?
     raise "Please use passanger/cargo train" if (@t != 'passanger') && (@t != 'cargo')
 
-    @pTrain = PassangerTrain.new(@n,@t,@v) if @t == 'passanger'
-    @cTrain = CargoTrain.new(@n,@t,@v) if @t == 'cargo'
+    @pTrain = PassangerTrain.new(@n,@t,@v,@p) if @t == 'passanger'
+    @cTrain = CargoTrain.new(@n,@t,@v,@vol) if @t == 'cargo'
 
      
   rescue RuntimeError => e
@@ -129,6 +140,12 @@ def self.where_am_i
   @select_train.change_index(@m_st)
   @list_train = Train.find(@iam)
   @list_train.whatis_my_station
+end
+
+def self.show_vagons
+  @sn.each do |sn|
+    sn.list_train_station {}
+  end
 end
 
 end
