@@ -20,7 +20,9 @@ class Train
   end
 
   def check_train_vagons
-    self.vagons.each {|v| p v}
+    vagons.each do |v|
+      yield 
+    end
   end
   
   def valid?

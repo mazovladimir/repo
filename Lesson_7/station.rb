@@ -11,9 +11,8 @@ class Station
   end
 
   def list_train_station
-    ObjectSpace.each_object(Train) do |x| 
-      @my_name = @name
-      puts "#{x} is on the #{x.current_station} station" if x.current_station.to_s == @my_name
+    @my_trains.each do |x| 
+      yield
     end
   end
 
