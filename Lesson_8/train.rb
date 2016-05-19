@@ -78,12 +78,14 @@ class Train
   end
 
   def next_station
-    @station.delete_train(self) if !@route[0]
-    @index_station += 1 if @index_station < @route.count - 1
-    @mystation = current_station
-    @station = Station.new(@mystation.to_s)
-    @station.in_train(self)
-    p @station
+    if @index_station < @route.count - 1
+       @station.delete_train(self) 
+       @index_station += 1
+       @mystation = @route[@index_station]
+       @station = Station.new(@mystation.to_s)
+       @station.in_train(self)
+       p @station
+    end
   end
 
   def before_station
