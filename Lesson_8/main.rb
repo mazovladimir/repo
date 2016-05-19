@@ -8,7 +8,8 @@ require_relative 'passanger_train'
 
 class MyMenu
   @t = []
-  def self.menu
+  class << self
+  def menu
     loop do
       puts '0. Create first and last station'
       puts '1. Add station'
@@ -54,7 +55,6 @@ class MyMenu
 
   private
 
-  class << self
   def new_route
     print 'Enter the first station: '
     f = gets.chomp
