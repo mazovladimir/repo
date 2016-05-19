@@ -1,6 +1,6 @@
 class PassangerTrain < Train
-  def initialize(number,type,vagon,place)
-    super(number,type,vagon)
+  def initialize(number, type, vagon, place)
+    super(number, type, vagon)
     @place = place
     @all_place = place
   end
@@ -15,7 +15,7 @@ class PassangerTrain < Train
   end
 
   def take_place
-    @place-=1 if @place >= 1
+    @place -= 1 if @place >= 1
   end
 
   protected
@@ -25,6 +25,6 @@ class PassangerTrain < Train
   end
 
   def register_instance
-    @count_inst = ObjectSpace.each_object(self).to_a.size+=1
+    @count_inst = ObjectSpace.each_object(self).to_a.size += 1
   end
 end

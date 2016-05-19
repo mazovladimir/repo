@@ -1,14 +1,15 @@
-require_relative 'CompanyName'
-require_relative 'InstanceCounter'
+require_relative 'company_name'
+require_relative 'instance_counter'
+require_relative 'station'
 
 class Train
-  NUMBER_FORMAT = /^(\d{3,}|[a-z]{3,})-?(\d{2,}|[a-z]{2,})$/i
   include CompanyName
   include InstanceCounter
+  NUMBER_FORMAT = /^(\d{3,}|[a-z]{3,})-?(\d{2,}|[a-z]{2,})$/i
   @@train_hash = {}
   attr_reader :speed, :vagon, :route, :type, :vagons, :number
   attr_writer :number
-  def initialize(number,type,vagon)
+  def initialize(number, type, vagon)
     @number = number
     @type = type
     @vagon = vagon
@@ -18,13 +19,13 @@ class Train
     @vagons = []
     @@train_hash[self.number] = self
   end
-
+  
   def check_train_vagons
     vagons.each do |v|
       yield(v)
     end
   end
-  
+
   def valid?
     validate!
   rescue
@@ -32,11 +33,14 @@ class Train
   end
 
   def route_inherit(path)
-    @route = path.stationS
+    @route = path.stations
+    @mystation = @route[0]
+    @station = Station.new(@mystation.to_s)
+    @station.in_train(self)
   end
 
   def vagon_attach(va)
-      @vagons << va if vagon_allowed?(va) && @speed == 0
+    @vagons << va if vagon_allowed?(va) && @speed == 0
   end
 
   def self.find(number)
@@ -56,9 +60,9 @@ class Train
   end
 
   def whatis_my_station
-    puts "Before station is: #{@route[@index_station-1]}" if @index_station > 0
-    puts "Current station is: #{@route[@index_station]}"
-    puts "Next station is: #{@route[@index_station+1]}"
+    puts "Before station: #{@route[@index_station - 1]}" if @index_station > 0
+    puts "Current station: #{@route[@index_station]}"
+    puts "Next station: #{@route[@index_station + 1]}"
   end
 
   def current_station
@@ -74,17 +78,30 @@ class Train
   end
 
   def next_station
+    @station.delete_train(self)
     @index_station += 1 if @index_station < @route.count - 1
+    @mystation = current_station
+    @station = Station.new(@mystation.to_s)
+    @station.in_train(self)
+    p @station
   end
 
   def before_station
-    @index_station -=1 if @index_station > 0
+    @station.delete_train(self)
+    @index_station -= 1 if @index_station > 0
+    @mystation = current_station
+    #@station = Station.new(@mystation.to_s)
+    @station.in_train(self)
+    p @station
   end
 
   protected
+
   def validate!
-    raise "Incorrect format of the number" if number !~ NUMBER_FORMAT
-    raise "Please correct the number of vagons" if (vagon.to_i < 0) || (vagon.to_i > 20) || vagon.empty?
+    raise 'Incorrect format of the number' if number !~ NUMBER_FORMAT
+    if (vagon.to_i < 0) || (vagon.to_i > 20) || vagon.empty?
+      raise 'Incorrect number of vagons'
+    end
     true
   end
 end

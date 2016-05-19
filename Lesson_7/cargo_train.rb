@@ -1,12 +1,12 @@
 class CargoTrain < Train
-  def initialize(name,type,vagon,volume)
-    super(name,type,vagon)
+  def initialize(name, type, vagon, volume)
+    super(name, type, vagon)
     @volume = volume
     @all_volume = volume
   end
 
   def take_volume(myvolume)
-    @volume-=myvolume if @volume >= myvolume
+    @volume -= myvolume if @volume >= myvolume
   end
 
   def left_volume

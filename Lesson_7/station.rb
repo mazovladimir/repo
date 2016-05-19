@@ -11,7 +11,7 @@ class Station
   end
 
   def list_train_station
-    @my_trains.each do |x| 
+    @my_trains.each do |x|
       yield(x)
     end
   end
@@ -23,7 +23,7 @@ class Station
   end
 
   def validate_station!
-    raise "Station should be a string" if !(name.is_a? String)
+    raise 'Station should be a string' unless name.is_a? String
     raise "Station can't be empty" if name.nil?
     true
   end
@@ -31,17 +31,21 @@ class Station
   def self.all
     @@my_stations
   end
-    
+
   def in_train(new_train)
     @count += 1
     @my_trains << new_train
+  end
+
+  def delete_train(remove_train)
+    @my_trains.delete(remove_train)
   end
 
   def out_train
     if @count > 0
       @count -= 1
     else
-      puts "Vagonov net"
+      puts 'Vagonov net'
     end
   end
 end
