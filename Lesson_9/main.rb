@@ -114,6 +114,7 @@ class MyMenu
       @cvagon = CargoVagon.new if @cvagon.nil?
       @my_train.vagon_attach(@cvagon)
     end
+    p @my_train
   end
 
   def vagon_detach
@@ -124,6 +125,7 @@ class MyMenu
     @my_train = Train.find(@train)
     @my_train.vagon_detach(@pvagon)
     @my_train.vagon_detach(@cvagon)
+    p @my_train
   end
 
   def move_train
