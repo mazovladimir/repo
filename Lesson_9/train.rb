@@ -1,6 +1,8 @@
 require_relative 'company_name'
 require_relative 'instance_counter'
 require_relative 'station'
+require_relative 'passanger_vagon'
+require_relative 'cargo_vagon'
 
 class Train
   include CompanyName
@@ -18,6 +20,8 @@ class Train
     @index_station = 0
     @vagons = []
     @@train_hash[self.number] = self
+    vagon.to_i.times {|i| @vagons << PassangerVagon.new  } if @type == 'passanger'
+    vagon.to_i.times {|i| @vagons << CargoVagon.new  } if @type == 'cargo'
   end
 
   def check_train_vagons
