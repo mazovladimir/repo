@@ -38,9 +38,6 @@ class Train
 
   def route_inherit(path)
     @route = path.stations
-    @mystation = @route[0]
-    @station = Station.new(@mystation.to_s)
-    @station.in_train(self)
   end
 
   def vagon_attach(va)
@@ -55,8 +52,8 @@ class Train
     @@train_hash.keys
   end
 
-  def vagon_detach(va)
-    @vagons.delete(va) if @speed == 0 && @vagons.any?
+  def vagon_detach
+    @vagons.pop if @speed == 0 && @vagons.any?
   end
 
   def change_index(choice)
@@ -83,21 +80,13 @@ class Train
 
   def next_station
     if @index_station < @route.count - 1
-       @station.delete_train(self) 
        @index_station += 1
-       @mystation = @route[@index_station]
-       @station = Station.new(@mystation.to_s)
-       @station.in_train(self)
-       p @station
     end
   end
 
   def before_station
     if @index_station > 0
-       @station.delete_train(self)
        @index_station -= 1
-       @station.in_train(self)
-       p @station
     end
   end
 

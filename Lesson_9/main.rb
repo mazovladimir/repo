@@ -58,15 +58,20 @@ class MyMenu
   def new_route
     print 'Enter the first station: '
     f = gets.chomp
+    f_st = Station.new('f')
     print 'Enter the last station: '
     l = gets.chomp
-    @fl = Route.new(f, l)
+    l_st = Station.new('l')
+    @fl = Route.new(f_st, l_st)
+    p @fl
   end
 
   def add_station
     print 'Please enter the station name: '
     st_name = gets.chomp
-    @sn = @fl.add_station(st_name)
+    between_station = Station.new(st_name)
+    @fl.add_station(between_station)
+    p @fl
   end
 
   def create_train
@@ -123,35 +128,18 @@ class MyMenu
     print 'My choice is: '
     @train = gets.chomp
     @my_train = Train.find(@train)
-    @my_train.vagon_detach(@pvagon)
-    @my_train.vagon_detach(@cvagon)
+    @my_train.vagon_detach
     p @my_train
   end
 
-  def move_train
-    puts 'Which train do you want to use ?'
-    puts Train.my_trains
-    print 'My choice is: '
-    @train = gets.chomp
-    @my_train = Train.find(@train)
-    puts 'Which station do you want to move the train ?'
-    p @fl.stations
-    # @choose_station = @fl.stations
-    @m_st = gets.chomp
-    @my_train.route_inherit(@fl)
-  end
-
   def whereis_train
-    begin
-      raise "Please put the train to the station" if @m_st.nil?
       puts 'Which train do you want to use ?'
       puts Train.my_trains
       print 'My choice is: '
       @train = gets.chomp
-      @my_train.change_index(@m_st)
-      @my_train = Train.find(@train)
-      @my_stat = @my_train.whatis_my_station
-    end
+      @my_train.current_station
+      #@my_train = Train.find(@train)
+      #@my_stat = @my_train.whatis_my_station
   end
 
   def next_station
