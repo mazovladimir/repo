@@ -8,8 +8,7 @@ require_relative 'passanger_train'
 
 class MyMenu
   @t = []
-  class << self
-  def menu
+  def self.menu
     loop do
       puts '0. Create first and last station'
       puts '1. Add station'
@@ -30,32 +29,33 @@ class MyMenu
       case input
 
       when 0
-        new_route
+        fandlstations
       when 1
         add_station
       when 2
         create_train
       when 3
-        vagon_attach
+        new_vagon_attach
       when 4
-        vagon_detach
+        new_vagon_detach
       when 5
         move_train
       when 6
-        whereis_train
+        where_am_i
       when 7
         show_trains
       when 8
-        next_station
+        train_next_station
       when 9
-        before_station
+        train_before_station
       end
     end
   end
 
   private
 
-  def new_route
+  class << self
+  def fandlstations
     print 'Enter the first station: '
     f = gets.chomp
     print 'Enter the last station: '
@@ -86,7 +86,7 @@ class MyMenu
       end
 
       raise "The number of the train can't be empty" if @n.empty?
-      raise 'Use passanger/cargo' if (@t != 'passanger') && (@t != 'cargo')
+      raise 'Please use passanger/cargo train' if (@t != 'passanger') && (@t != 'cargo')
 
       @ptrain = PassangerTrain.new(@n, @t, @v, @p) if @t == 'passanger'
       @ctrain = CargoTrain.new(@n, @t, @v, @vol) if @t == 'cargo'
@@ -96,84 +96,85 @@ class MyMenu
       puts
       retry
     end
-    @ptrain.route_inherit(@fl) if @ptrain.class == PassangerTrain
-    @ctrain.route_inherit(@fl) if @ctrain.class == CargoTrain
     puts 'The train was successfully created'
   end
 
-  def vagon_attach
+  def new_vagon_attach
     puts 'Which train do you want to use ?'
     puts Train.my_trains
     print 'My choice is: '
-    @train = gets.chomp
-    @my_train = Train.find(@train)
-    if @my_train.class == PassangerTrain
+    @w_t = gets.chomp
+    @use_train = Train.find(@w_t)
+    if @use_train.class == PassangerTrain
       @pvagon = PassangerVagon.new if @pvagon.nil?
       @use_train.vagon_attach(@pvagon)
-    elsif @my_train.class == CargoTrain
+    elsif @use_train.class == CargoTrain
       @cvagon = CargoVagon.new if @cvagon.nil?
-      @my_train.vagon_attach(@cvagon)
+      @use_train.vagon_attach(@cvagon)
     end
   end
 
-  def vagon_detach
+  def new_vagon_detach
     puts 'Which train do you want to use ?'
     puts Train.my_trains
     print 'My choice is: '
-    @train = gets.chomp
-    @my_train = Train.find(@train)
-    @my_train.vagon_detach(@pvagon)
-    @my_train.vagon_detach(@cvagon)
+    @d_v = gets.chomp
+    @delete_use_train = Train.find(@d_v)
+    @delete_use_train.vagon_detach(@pvagon)
+    @delete_use_train.vagon_detach(@cvagon)
   end
 
   def move_train
     puts 'Which train do you want to use ?'
     puts Train.my_trains
     print 'My choice is: '
-    @train = gets.chomp
-    @my_train = Train.find(@train)
+    @m_t = gets.chomp
+    @select_train = Train.find(@m_t)
     puts 'Which station do you want to move the train ?'
     p @fl.stations
-    # @choose_station = @fl.stations
+    @choose_station = @fl.stations
     @m_st = gets.chomp
-    @my_train.route_inherit(@fl)
+    @select_train.route_inherit(@fl)
   end
 
-  def whereis_train
+  def where_am_i
     puts 'Which train do you want to use ?'
     puts Train.my_trains
     print 'My choice is: '
-    @train = gets.chomp
-    # @my_train = Train.find(@train)
-    @my_train.change_index(@m_st)
-    @my_train = Train.find(@train)
-    @my_stat = @my_train.whatis_my_station
+    @iam = gets.chomp
+    @select_train.change_index(@m_st)
+    @list_train = Train.find(@iam)
+    @my_stat = @list_train.whatis_my_station
   end
 
-  def next_station
+  def train_next_station
     puts 'Which train do you want to use ?'
     puts Train.my_trains
     print 'My choice is: '
-    @train = gets.chomp
-    @my_train = Train.find(@train)
-    #@my_train.route_inherit(@fl)
-    @my_train.next_station
-    puts "Your current station is  #{@my_train.current_station}"
+    @n_st = gets.chomp
+    @n_train = Train.find(@n_st)
+    @n_train.route_inherit(@fl)
+    @new_station = Station.new('@my_stat')
+    @new_station.in_train(@n_train)
+    @n_train.next_station
+    puts "Your current station is  #{@n_train.current_station}"
   end
 
-  def before_station
+  def train_before_station
     puts 'Which train do you want to use ?'
     puts Train.my_trains
     print 'My choice is: '
-    @train = gets.chomp
-    @my_train = Train.find(@train)
-    @my_train.route_inherit(@fl)
-    @my_train.before_station
-    puts "Your current station is  #{@my_train.current_station}"
+    @b_st = gets.chomp
+    @b_train = Train.find(@b_st)
+    @b_train.route_inherit(@fl)
+    @b_train.before_station
+    puts "Your current station is  #{@n_train.current_station}"
   end
 
   def show_trains
-    ObjectSpace.each_object(Station) { |x| puts "#{x.name} - " }
+    @sn.each do |_sn|
+      puts "There is a train on the #{@sn} station"
+    end
   end
   end
 end

@@ -171,9 +171,7 @@ class MyMenu
   end
 
   def show_trains
-    @sn.each do |_sn|
-      puts "There is a train on the #{@sn} station"
-    end
+    Train.train_list
   end
   end
 end

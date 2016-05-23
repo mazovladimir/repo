@@ -95,6 +95,10 @@ class Train
     p @station
   end
 
+  def self.train_list
+    @@my_stations.each {|x| p x}
+  end
+
   protected
 
   def validate!
