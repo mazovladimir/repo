@@ -140,14 +140,16 @@ class MyMenu
   end
 
   def whereis_train
-    puts 'Which train do you want to use ?'
-    puts Train.my_trains
-    print 'My choice is: '
-    @train = gets.chomp
-    # @my_train = Train.find(@train)
-    @my_train.change_index(@m_st)
-    @my_train = Train.find(@train)
-    @my_stat = @my_train.whatis_my_station
+    begin
+      raise "Please put the train to the station" if @m_st.nil?
+      puts 'Which train do you want to use ?'
+      puts Train.my_trains
+      print 'My choice is: '
+      @train = gets.chomp
+      @my_train.change_index(@m_st)
+      @my_train = Train.find(@train)
+      @my_stat = @my_train.whatis_my_station
+    end
   end
 
   def next_station
