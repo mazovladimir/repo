@@ -15,10 +15,14 @@ module Acessors
 
   def strong_attr_acessor(attr, myclass)
     attr_name = "@#{attr}".to_sym
-    class_name = "@#{myclass}"
+    myclass_name = "#{myclass}"
     define_method(attr) { instance_variable_get(attr_name) }
     define_method("#{attr}=".to_sym) do |value| 
-      instance_variable_set(attr_name, value) if instance_variable_get(attr_name).class == class_name
+      if value.class == myclass
+        instance_variable_set(attr_name, value)
+      else
+        raise "Incorrect Type"
+      end
     end
   end
 end
@@ -27,4 +31,5 @@ class Test
   extend Acessors
 
   attr_accessor_with_history :a, :b, :c
+  strong_attr_acessor :a, String
 end
