@@ -90,12 +90,6 @@ class Train
     end
   end
 
-  def train_list
-    @route.each do |route|
-      
-    end
-  end
-
   protected
 
   def validate!

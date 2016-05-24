@@ -12,6 +12,15 @@ module Acessors
       define_method("#{name}_history".to_sym) { p instance_variable_get(array_name) }
     end
   end
+
+  def strong_attr_acessor(attr, myclass)
+    attr_name = "@#{attr}".to_sym
+    class_name = "@#{myclass}"
+    define_method(attr) { instance_variable_get(attr_name) }
+    define_method("#{attr}=".to_sym) do |value| 
+      instance_variable_set(attr_name, value) if instance_variable_get(attr_name).class == class_name
+    end
+  end
 end
 
 class Test
